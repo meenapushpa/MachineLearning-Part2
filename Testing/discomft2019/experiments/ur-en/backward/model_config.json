@@ -1,0 +1,62 @@
+{
+  "basedir": "D:/Priya/Work6/Workspace/Testing/discomt2019/experiments/ur-en",
+  "train": {
+    "batch": {
+      "fixed_capacity": true,
+      "size": 2,
+      "capacity": 4096,
+      "sort": true
+    },
+    "warm_up_step": 4000,
+    "label_smoothing": 0.1,
+    "stop": {
+      "limit": {
+        "type": "step",
+        "n": 9
+      },
+      "early_stopping": {
+        "type": "step",
+        "n": 5,
+        "test_period": 3
+      }
+    },
+    "data": {
+      "source_train": [
+        "./data/concat/parallel/train.trg"
+      ],
+      "target_train": [
+        "./data/concat/parallel/train.src"
+      ],
+      "source_dev": "./data/concat/parallel/dev2010.trg.2",
+      "target_dev": "./data/concat/parallel/dev2010.src"
+    }
+  },
+  "test": {
+    "length_penalty_a": 1
+  },
+  "network": {
+    "n_blocks": 6,
+    "n_heads": 8,
+    "attention_size": 512,
+    "embed_size": 512,
+    "dropout_rate": 0.1,
+    "share_embedding": true,
+    "positional_embedding": false,
+    "relative_position": false,
+    "rel_pos_max_dist": 16,
+    "rel_pos_unique_per_head": true
+  },
+  "vocab": {
+    "PAD_ID": 0,
+    "SOS_ID": 1,
+    "EOS_ID": 2,
+    "UNK_ID": 3,
+    "vocab_size": 712,
+    "source_dict": "data/preprocessed/sp16k.vocab",
+    "target_dict": "data/preprocessed/sp16k.vocab"
+  },
+  "source_suffix": ".trg",
+  "target_suffix": ".src",
+  "beam_size": 1,
+  "target_context": false
+}
